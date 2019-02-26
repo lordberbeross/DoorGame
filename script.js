@@ -9,6 +9,8 @@ let numClosedDoors= 3;
 let openDoor1;
 let openDoor2;
 let openDoor3;
+let winStreak= 0;
+let counter = document.getElementById('counterS');
 const startButton= document.getElementById('start');
 let currentlyPlaying = true;
 const isBot= (door)=>{
@@ -29,8 +31,12 @@ const playDoor= (door)=>{
 	numClosedDoors--;
 	if(numClosedDoors===0){
 		gameOver('win');
+		counterS.innerHTML=winStreak;
+
 	}else if(isBot(door)){
 		gameOver('lose');
+
+
 	}
 }
 const randomChoreDoorGenerator= ()=>{
@@ -83,20 +89,26 @@ startButton.onclick= ()=>{
 }
 const startRound= ()=>{
 	
+	counterS.innerHTML=winStreak;
 	door1.src= closedDoorPath;
 	door2.src= closedDoorPath;
 	door3.src= closedDoorPath;
 	numClosedDoors=3; 
 	currentlyPlaying=true;
 	startButton.innerHTML='Good luck!';
+	
 	randomChoreDoorGenerator();
 		
 }
 const gameOver= (status)=>{
 if(status==='win'){
 	startButton.innerHTML= 'You win! Play Again?'
+	winStreak++;
+	console.log(winStreak)
+	
 }else{
 	startButton.innerHTML='Game Over! Play Again?'
+	winStreak = 0;
 }
 currentlyPlaying=false;
 }
